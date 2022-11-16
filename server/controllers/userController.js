@@ -39,11 +39,13 @@ class UserController {
         if(!user) {
             return next(ApiError.internal('Пользовалтель с таким имененм не найден!'))
         }
-
+        console.log(email, password, user);
         let comparePassword = bcrypt.compareSync(password, user.password)
-        if(!comparePassword) {
+        if(!comparePassword) {т
             return next(ApiError.internal('Указан неверный пароль'))
         }
+
+        console.log(user.password);
 
         const token = generateJwt(user.id, user.email, user.role)
         return res.json({token})
@@ -51,10 +53,10 @@ class UserController {
     }
 
     async check(request, response, next) {
-        // const token = generateJwt(request.user.id, request.user.email, request.user.role)
-        // return response.json({token})
+        const token = generateJwt(request.user.id, request.user.email, request.user.role)
+        return response.json({token})
 
-        // response.json({message: 'ALL RIGHT'})
+        response.json({message: 'ALL RIGHT'})
     }
 }
 
