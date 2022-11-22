@@ -1,23 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 import bigStar from '../assets/big_star.png'
+import { fetchOneDevice } from '../http/deviceApi';
 
 const DevicePage = () => {
-    const device = {id: 7, name: "Iphone 12 pro", price: 25000, rating: 5, img: "https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-14-Pro/Deep-Purple/Apple-iPhone-14-Pro-Deep-Purple-thumbnail.png"}
-    const desctiption = [
-        {id:1, title: 'Оперативная память', desctiption: '4ГБ'},
-        {id:2, title: 'Камера', desctiption: '12МП'},
-        {id:3, title: 'Процессор', desctiption: 'Bionic15'},
-        {id:4, title: 'Кол-во ядер', desctiption: '8'},
-        {id:5, title: 'Аккумулятор', desctiption: '4000Ma/h'},
-        {id:6, title: 'Диагональ дисплея', desctiption: '5.5'},
-        {id:7, title: 'Компплектация', desctiption: 'Телефон, USB-кабель'},
-    ]
+    const {device, setDevice} = useState( { info: [] } )
+    const {id} = useParams()
+    useEffect(() => {
+        fetchOneDevice(id).then(data => setDevice(data))
+    }, [])
     return (
         <Container>
             <Row>
                 <Col md={4} className='mt-3'>
-                    <Image height={300} src={device.img} />
+                    <Image height={300} src={process.env.APP_API_URL + device.img} />
                 </Col>
                 <Col md={4} className='mt-3'>
                     <Row className='d-flex flex-column align-items-center'>
@@ -43,9 +40,9 @@ const DevicePage = () => {
             </Row>
             <Row className='d-flex flex-column m-3'>
                 <h2>Характеристики</h2>
-                {desctiption.map((info, index) => 
+                {device.info.map((info, index) => 
                     <Row key={info.id} style={{background: index % 2 ? 'white' : 'lightgray'}}>
-                        {info.title}: {info.desctiption} 
+                        {info.title}: {info.description} 
                     </Row>
                 )}
             </Row>

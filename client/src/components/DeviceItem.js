@@ -9,8 +9,8 @@ const DeviceItem = ({device}) => {
     console.log(navigate);
     return (
         <Col className='mt-3' md={3} onClick={() => navigate(DEVICE_ROUTE + '/' + device.id, )}>
-            <Card style={{width: 150, cursor: 'pointer', padding: '5px'}} border={'ligth'}>
-                <Image height={150} src={device.img}/>
+            <Card style={{width: 150, cursor: 'pointer', padding: '5px'}} border={'light'}>
+                <Image height={150} src={process.env.APP_API_URL + device.img}/>
                 <div className='text-black-50 mt-3 d-flex justify-content-between align-items-center'>
                     <div>Samsung..</div>
                     <div className='d-flex align-items-center'>
