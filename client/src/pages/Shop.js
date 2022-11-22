@@ -7,13 +7,13 @@ import DeviceList from '../components/DeviceList';
 import TypeBar from '../components/TypeBar';
 import { fetchBrands, fetchDevices, fetchTypes } from '../http/deviceApi';
 
-const Shop = observer(() => {
+const Shop = observer( () => {
     const {device} = useContext(Context)
 
-    useEffect(() => {
+    useEffect( () => {
         fetchTypes().then(data => device.setTypes(data))
-        fetchBrands().then(data => device.setBrands(data))
-        fetchDevices().then(data => device.setDevices(data.rows))
+        // fetchBrands().then(data => device.setBrands(data))
+        fetchDevices().then(data => device.setDevices(data))
     }, [])
 
     return (

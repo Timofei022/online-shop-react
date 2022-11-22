@@ -45,8 +45,6 @@ class UserController {
             return next(ApiError.internal('Указан неверный пароль'))
         }
 
-        console.log(user.password);
-
         const token = generateJwt(user.id, user.email, user.role)
         return res.json({token})
 
@@ -56,7 +54,6 @@ class UserController {
         const token = generateJwt(request.user.id, request.user.email, request.user.role)
         return response.json({token})
 
-        response.json({message: 'ALL RIGHT'})
     }
 }
 

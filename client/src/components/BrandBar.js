@@ -3,11 +3,11 @@ import React, { useContext } from 'react';
 import { Card, Row } from 'react-bootstrap';
 import { Context } from '../index';
 
-const BrandBar = observer(() => {
+const BrandBar = observer( () => {
     const {device} = useContext(Context)
     return (
         <Row className="d-flex">
-            {device.brands.map( brand =>
+            { device.brands.map( brand =>
                 <Card 
                     style={{cursor: 'pointer', width: 100, textAlign: 'center'}}
                     key={brand.id}
